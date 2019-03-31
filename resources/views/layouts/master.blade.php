@@ -73,7 +73,7 @@
                with font-awesome or any other icon font library -->
                <li class="nav-item">
                 <router-link to="/dashboard" class="nav-link">
-                  <i class="nav-icon  fas fa-tachometer-alt"></i>
+                  <i class="nav-icon  fas fa-tachometer-alt text-blue"></i>
                   <p>
                  Dashboard
                     
@@ -84,7 +84,7 @@
          
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link ">
-              <i class="nav-icon fas fa-cogs"></i>
+              <i class="nav-icon fas fa-cogs text-yellow"></i>
               <p>
                 Management
                 <i class="right fas fa-angle-left"></i>
@@ -92,10 +92,10 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-circle-o nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
+                <router-link to="/users" class="nav-link">
+                  <i class="fas fa-users text-orange nav-icon"></i>
+                  <p>Users</p>
+                </router-link>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -107,7 +107,7 @@
           </li>
           <li class="nav-item">
             <router-link to="/profile" class="nav-link">
-              <i class="nav-icon  fas fa-user"></i>
+              <i class="nav-icon  fas fa-user text-green"></i>
               <p>
              Profile
                 
@@ -115,12 +115,17 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-power-off"></i>
+            <a class="nav-link" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+              <i class="nav-icon fa fa-power-off text-red"></i>
               <p>
                 Logout
              
               </p>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
             </a>
           </li>
         </ul>
@@ -137,6 +142,10 @@
     <div class="content">
       <div class="container-fluid">
        <router-view></router-view>
+
+       <!-- set progressbar -->
+        <vue-progress-bar></vue-progress-bar>
+        
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>

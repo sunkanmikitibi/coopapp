@@ -14122,7 +14122,27 @@ a.text-muted:hover {
 .elevation-5 {
   -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
           box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-}/*!
+}.text-blue {
+  color: #007bff;
+}
+
+.text-red {
+  color: #dc3545;
+}
+
+.text-yellow {
+  color: #ffc107;
+}
+
+.text-green {
+  color: #28a745;
+}
+
+.text-orange {
+  color: #fd7e14;
+}
+
+/*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
@@ -31453,7 +31473,7 @@ readers do not read off random characters that represent icons */
 }
 
 .router-link-exact-active {
-  background-color: red;
-  color: #fff;
+  background-color: #3F51B5;
+  color: #fff !important;
 }
 
