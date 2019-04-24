@@ -48,8 +48,6 @@ class UserController extends Controller
             'type' => $request['type'],
             'photo' => $request['photo'],
             'password' => Hash::make($request['password'])
-            
-
         ]);
     }
 
@@ -67,6 +65,50 @@ class UserController extends Controller
     public function profile()
     {
         return auth('api')->user();
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user =  auth('api')->user();
+
+         
+        $this->validate($request, [
+            'name'=> 'required',
+            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
+            'password' => 'sometimes|string|min:5'
+        ]);
+    
+
+        $currentPhoto = $user->photo;
+
+        if ($request->photo != $currentPhoto  ) {
+            //name the image
+            $name = time().'.'. explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+
+            //save the image
+            \Image::make($request->photo)->save(public_path('img/profile/'). $name);
+
+            //change the value of profile photo before updating the profile
+            $request->merge(['photo' => $name ]);
+           // $request->photo = $name;
+
+           $userPhoto = public_path('img/profile/').$currentPhoto;
+
+           if(file_exists($userPhoto)){
+               @unlink($userPhoto);
+           }
+
+
+        } 
+
+        if(!empty($request->password)){
+            $request->merge(['password' => Hash::make($request['password'])]);
+
+        }
+
+        $user->update($request->all());
+
+        return ['message' => 'success'];
     }
 
     /**
